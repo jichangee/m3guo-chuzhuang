@@ -52,7 +52,9 @@ function App() {
           </Space>
         </Card>
         <Card>
-          <Table pagination={false} columns={columns} dataSource={list} />
+          <Table pagination={{
+            pageSize: 5
+          }} columns={columns} dataSource={list} />
         </Card>
       </Space>
     </div>
