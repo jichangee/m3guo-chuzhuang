@@ -11,8 +11,7 @@ const columns = [
     width: 200,
     render: (text, record) => (
       <>
-        <img className="hero-icon" src={record.hero_icon} />
-        <span>{text}</span>
+        <img alt={text} className="hero-icon" src={record.hero_icon} />
       </>
     ),
   },
