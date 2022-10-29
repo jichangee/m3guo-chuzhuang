@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import heroList from "./lib/list";
 import "./App.css";
 import { Space, Input, Button, Table, Card } from "antd";

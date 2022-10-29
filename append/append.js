@@ -6,18 +6,21 @@ const prefix = 'export default '
 let list = JSON.parse(listStr.replace(prefix, ''))
 
 const appendItem = {
-  hero_name: '孔融',
-  equip: 'https://s2.loli.net/2022/07/10/WYPOi6ZnyFUB39e.png',
+  hero_name: '顾雍',
+  equip: 'https://raw.githubusercontent.com/jichangee/gallery/master/m3guo/20221029214622.png',
   hero_icon: '',
   key: list.length
 }
 
-const oldItem = list.find(item => item.hero_name === appendItem.hero_name)
+let appendIndex = list.findIndex(item => item.hero_name === appendItem.hero_name)
 
-if (oldItem) {
-  appendItem.hero_icon = oldItem.hero_icon
+if (appendIndex > -1) {
+  appendItem.hero_icon =  appendItem.hero_icon || list[appendIndex].hero_icon
+  appendItem.key =  list[appendIndex].key
+  list.splice(appendIndex, 1, appendItem)
+} else {
+  list = [appendItem].concat(list)
 }
-list = [appendItem].concat(list)
 
 fs.writeFileSync(listPath, `${prefix}${JSON.stringify(list)}`)
 
