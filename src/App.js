@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import heroList from "./lib/list";
 import "./App.css";
-import { Space, Input, Button, Table, Card } from "antd";
+import { Space, Input, Table, Card } from "antd";
 
 const columns = [
   {
@@ -19,15 +19,24 @@ const columns = [
     title: "出装",
     key: "equip",
     dataIndex: "equip",
-    render: (text) => <img className="equip" src={text} />,
+    render: (text, row) => <img className="equip" src={text} onError={e => e.currentTarget.src = row.equipBack} />,
   },
 ];
 
 function App() {
   const [list, setList] = useState([]);
 
-  const search = (q) => {
-    return heroList.filter((item) => item.hero_name.indexOf(q) > -1);
+  const search = (heroName) => {
+    const heroItem = heroList.find((item) => item.hero_name.indexOf(heroName) > -1);
+    return [
+      {
+        key: "1",
+        hero_name: heroName,
+        hero_icon: heroItem && heroItem.hero_icon,
+        equip: `https://raw.githubusercontent.com/jichangee/gallery/master/m3guo/${heroName}.png`,
+        equipBack: heroItem && heroItem.equip
+      },
+    ]
   };
 
   const handleSearch = (keyword) => {
